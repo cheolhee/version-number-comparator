@@ -41,16 +41,35 @@ public class NumericalVersionTest {
     String v8 = "5.0.2";
     String v9 = null;
 
+    /* some uncommon cases */
+    String v_1 = "1"; // no dots
+    String v_1_0 = "1.0";
+    String v_1_0_0 = "1.0.0";
+    String v_1_0_1 = "1.0.1";
+
     @Test
     public void compareTwoNonEqual() {
         NumericalVersionComparator versionComparator = new NumericalVersionComparator();
         Assert.assertEquals(-1, versionComparator.compare(v1, v2));
+
+        Assert.assertEquals(1,  versionComparator.compare(v_1_0_1 , v_1));
+        Assert.assertEquals(1,  versionComparator.compare(v_1_0_1 , v_1_0));
+        Assert.assertEquals(1,  versionComparator.compare(v_1_0_1 , v_1_0_0));
+        Assert.assertEquals(-1, versionComparator.compare(v_1     , v_1_0_1));
+        Assert.assertEquals(-1, versionComparator.compare(v_1_0   , v_1_0_1));
+        Assert.assertEquals(-1, versionComparator.compare(v_1_0_0 , v_1_0_1));
     }
 
     @Test
     public void compareTwoEqual() {
         NumericalVersionComparator versionComparator = new NumericalVersionComparator();
         Assert.assertEquals(0, versionComparator.compare(v4, v8));
+
+        Assert.assertEquals(0,  versionComparator.compare(v_1_0 , v_1));
+        Assert.assertEquals(0,  versionComparator.compare(v_1 , v_1_0));
+        Assert.assertEquals(0,  versionComparator.compare(v_1_0_0 , v_1));
+        Assert.assertEquals(0,  versionComparator.compare(v_1_0_0 , v_1_0));
+
     }
 
     @Test

@@ -90,8 +90,8 @@ public class NumericalVersionComparator implements Comparator<String> {
         int max = Integer.max(v1Arr.length, v2Arr.length);
 
         for (int i = 0; i < max; i++) {
-            v1Temp = Integer.parseInt(i != v1Arr.length ? v1Arr[i] : "0");
-            v2Temp = Integer.parseInt(i != v2Arr.length ? v2Arr[i] : "0");
+            v1Temp = i < v1Arr.length ? Integer.parseInt(v1Arr[i]) : 0;
+            v2Temp = i < v2Arr.length ? Integer.parseInt(v2Arr[i]) : 0;
             if (v1Temp != v2Temp) {
                 break;
             }
